@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="blue">#FF03A9F4</color>
+    <!-- Brand Colors -->
+    <color name="brand_color">#1565C0</color> <!-- Deep Blue -->
+    <color name="brand_text_color">#FFFFFF</color> <!-- White text on brand color -->
+
+    <!-- Button Colors -->
+    <color name="button_color">#FF6F00</color> <!-- Warm Orange -->
+    <color name="button_text_color">#FFFFFF</color>
+
+    <!-- Offer / Success Colors -->
+    <color name="offer_color">#43A047</color> <!-- Green -->
+    <color name="offer_text_color">#FFFFFF</color>
+
+    <!-- Background & Text -->
+    <color name="background_color">#FFFFFF</color>
+    <color name="text_color_primary">#212121</color> <!-- Main text -->
+    <color name="text_color_secondary">#757575</color> <!-- Subtext -->
+
+    <!-- Surface (Cards, AppBars, Sheets) -->
+    <color name="surface_color">#FFFFFF</color>
+    <color name="surface_text_color">#212121</color>
+
+    <!-- Error -->
+    <color name="error_color">#B00020</color>
+    <color name="error_text_color">#FFFFFF</color>
+
+
+</resources>
