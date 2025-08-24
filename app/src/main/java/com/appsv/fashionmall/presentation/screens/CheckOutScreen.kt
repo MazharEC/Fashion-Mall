@@ -8,7 +8,8 @@ import com.appsv.fashionmall.presentation.viewmodel.FashionMallViewModel
 @Composable
 fun CheckoutScreen(
     viewModel: FashionMallViewModel = hiltViewModel(),
-    navController: NavController
+    navController: NavController,
+    productId: String
 ) {
 
 

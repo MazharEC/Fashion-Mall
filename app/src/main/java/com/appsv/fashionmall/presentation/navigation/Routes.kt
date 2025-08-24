@@ -27,7 +27,7 @@ sealed class Routes {
     object ProfileScreen
 
     @Serializable
-    object WishListScreen
+    object FavListScreen
 
     @Serializable
     object CartScreen

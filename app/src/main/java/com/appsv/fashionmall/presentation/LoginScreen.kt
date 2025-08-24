@@ -37,12 +37,12 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.appsv.fashionmall.R
 import com.appsv.fashionmall.presentation.utils.CustomTextField
 
-@Preview(showSystemUi = true)
 @Composable
-fun LoginScreenUi(){
+fun LoginScreen(navController: NavHostController) {
 
     val context = LocalContext.current
     var email by remember { mutableStateOf("") }
