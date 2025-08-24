@@ -1,5 +1,6 @@
 package com.appsv.fashionmall.presentation.viewmodel
 
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.appsv.fashionmall.common.HomeScreenState
@@ -7,6 +8,7 @@ import com.appsv.fashionmall.common.ResultState
 import com.appsv.fashionmall.domain.models.CartDataModels
 import com.appsv.fashionmall.domain.models.CategoryDataModels
 import com.appsv.fashionmall.domain.models.ProductDataModels
+import com.appsv.fashionmall.domain.models.UserData
 import com.appsv.fashionmall.domain.models.UserDataParent
 import com.appsv.fashionmall.domain.useCase.AddToCartUseCase
 import com.appsv.fashionmall.domain.useCase.AddToFavUseCase
@@ -28,6 +30,7 @@ import com.appsv.fashionmall.domain.useCase.UpdateUserDataUseCase
 import com.appsv.fashionmall.domain.useCase.UploadUserProfileImageUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -223,7 +226,383 @@ class FashionMallViewModel @Inject constructor(
         }
     }
 
+    fun getAllProducts() {
+        viewModelScope.launch {
 
+            getAllProductsUseCase.getAllProducts().collect {
+
+                when(it){
+
+                    is ResultState.Error -> {
+                        _getAllProductsState.value = _getAllProductsState.value.copy(
+                            isLoading = false,
+                            errorMessages = it.message
+                        )
+                    }
+                    is ResultState.Loading -> {
+                        _getAllProductsState.value = _getAllProductsState.value.copy(
+                            isLoading = true
+                        )
+                    }
+                    is ResultState.Success -> {
+                        _getAllProductsState.value = _getAllProductsState.value.copy(
+                            isLoading = false,
+                            userData = it.data
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    fun getAllFav() {
+        viewModelScope.launch {
+
+            getAllFavUseCase.getAllFav().collect{
+
+                when(it){
+
+                    is ResultState.Error -> {
+                        _getAllFavState.value = _getAllFavState.value.copy(
+                            isLoading = false,
+                            errorMessages = it.message
+                        )
+                    }
+                    is ResultState.Loading -> {
+                        _getAllFavState.value = _getAllFavState.value.copy(
+                            isLoading = true
+                        )
+                    }
+                    is ResultState.Success -> {
+                        _getAllFavState.value = _getAllFavState.value.copy(
+                            isLoading = false,
+                            userData = it.data
+                        )
+                    }
+                }
+            }
+
+        }
+    }
+
+    fun addToFav(productDataModels: ProductDataModels) {
+        viewModelScope.launch {
+
+            addToFavUseCase.addToFav(productDataModels).collect{
+
+                when(it){
+
+                    is ResultState.Error -> {
+                        _addToFavState.value = _addToFavState.value.copy(
+                            isLoading = false,
+                            errorMessages = it.message
+                        )
+                    }
+                    is ResultState.Loading -> {
+                        _addToFavState.value = _addToFavState.value.copy(
+                            isLoading = true
+                        )
+                    }
+                    is ResultState.Success -> {
+                        _addToFavState.value = _addToFavState.value.copy(
+                            isLoading = false,
+                            userData = it.data
+                        )
+                    }
+                }
+            }
+
+        }
+    }
+
+    fun getProductById(productId : String){
+        viewModelScope.launch {
+
+            getProductByIdUseCase.getProductById(productId).collect{
+
+                when(it){
+
+                    is ResultState.Error -> {
+                        _getProductByIdState.value = _getProductByIdState.value.copy(
+                            isLoading = false,
+                            errorMessages = it.message
+                        )
+                    }
+                    is ResultState.Loading -> {
+                        _getProductByIdState.value = _getProductByIdState.value.copy(
+                            isLoading = true
+                        )
+                    }
+                    is ResultState.Success -> {
+                        _getProductByIdState.value = _getProductByIdState.value.copy(
+                            isLoading = false,
+                            userData = it.data
+                        )
+                    }
+                }
+            }
+        }
+
+    }
+
+    fun addToCart(cartDataModels: CartDataModels){
+        viewModelScope.launch {
+
+            addToCartUseCase.addToCart(cartDataModels).collect{
+
+                when(it){
+
+                    is ResultState.Error -> {
+                        _addToCartState.value = _addToCartState.value.copy(
+                            isLoading = false,
+                            errorMessages = it.message
+                        )
+                    }
+                    is ResultState.Loading -> {
+                        _addToCartState.value = _addToCartState.value.copy(
+                            isLoading = true
+                        )
+                    }
+                    is ResultState.Success -> {
+                        _addToCartState.value = _addToCartState.value.copy(
+                            isLoading = false,
+                            userData = it.data
+                        )
+                    }
+                }
+
+            }
+
+        }
+    }
+
+    init {
+        loadHomeScreenData()
+    }
+
+    private fun loadHomeScreenData() {
+        viewModelScope.launch {
+
+            combine(
+
+                getCategoriesInLimitedUseCase.getCategoriesInLimited(),
+                getProductsInLimitedUseCase.getProductsInLimited(),
+                getBannerUseCase.getBanner()
+
+            ) { categoriesResult, productsResult, bannerResult ->
+
+                when{
+
+                    categoriesResult is ResultState.Error -> {
+
+                        HomeScreenState(isLoading = false, errorMessages = categoriesResult.message)
+                    }
+                    productsResult is ResultState.Error -> {
+
+                        HomeScreenState(isLoading = false, errorMessages = productsResult.message)
+                    }
+                    bannerResult is ResultState.Error -> {
+
+                        HomeScreenState(isLoading = false, errorMessages = bannerResult.message)
+                    }
+
+                    categoriesResult is ResultState.Success && productsResult is ResultState.Success && bannerResult is ResultState.Success -> {
+
+                        HomeScreenState(
+                            isLoading = false,
+                            categories = categoriesResult.data,
+                            products = productsResult.data,
+                            banner = bannerResult.data
+                        )
+                    }
+
+                    else -> {
+                        HomeScreenState(isLoading = true)
+                    }
+                }
+            }.collect {
+
+                state -> _homeScreenState.value = state
+            }
+        }
+    }
+
+    fun upLoadUserProfileImage(uri: Uri){
+        viewModelScope.launch {
+
+            uploadUserProfileImageUseCase.uploadProfileImage(uri).collect{
+
+                when(it){
+
+                    is ResultState.Error -> {
+                        _userProfileImageState.value = _userProfileImageState.value.copy(
+                            isLoading = false,
+                            errorMessages = it.message
+                        )
+                    }
+                    is ResultState.Loading -> {
+                        _userProfileImageState.value = _userProfileImageState.value.copy(
+                            isLoading = true
+                        )
+                    }
+                    is ResultState.Success -> {
+                        _userProfileImageState.value = _userProfileImageState.value.copy(
+                            isLoading = false,
+                            userData = it.data
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    fun upDateUserData(userDataParent: UserDataParent) {
+
+        viewModelScope.launch {
+
+            updateUserDataUseCase.updateUserData(userDataParent = userDataParent).collect {
+
+                when(it) {
+                    is ResultState.Error -> {
+                        _updateScreenState.value = _updateScreenState.value.copy(
+                            isLoading = false,
+                            errorMessages = it.message
+                        )
+                    }
+                    is ResultState.Loading -> {
+                        _updateScreenState.value = _updateScreenState.value.copy(
+                            isLoading = true
+                        )
+                    }
+                    is ResultState.Success -> {
+                        _updateScreenState.value = _updateScreenState.value.copy(
+                            isLoading = false,
+                            userData = it.data
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    fun createUser(userData: UserData) {
+        viewModelScope.launch {
+
+            registerUserUseCase.registerUser(userData).collect {
+
+                when(it){
+
+                    is ResultState.Error -> {
+                        _signUpScreenState.value = _signUpScreenState.value.copy(
+                            isLoading = false,
+                            errorMessages = it.message
+                        )
+                    }
+                    is ResultState.Loading -> {
+                        _signUpScreenState.value = _signUpScreenState.value.copy(
+                            isLoading = true
+                        )
+                    }
+                    is ResultState.Success -> {
+                        _signUpScreenState.value = _signUpScreenState.value.copy(
+                            isLoading = false,
+                            userData = it.data
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    fun loginUser(userData: UserData){
+        viewModelScope.launch {
+
+            loginUseCase.loginUser(userData).collect{
+
+                when(it){
+
+                    is ResultState.Error -> {
+                        _loginScreenState.value = _loginScreenState.value.copy(
+                            isLoading = false,
+                            errorMessages = it.message
+                        )
+                    }
+                    is ResultState.Loading -> {
+                        _loginScreenState.value = _loginScreenState.value.copy(
+                            isLoading = true
+                        )
+                    }
+                    is ResultState.Success -> {
+                        _loginScreenState.value = _loginScreenState.value.copy(
+                            isLoading = false,
+                            userData = it.data
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    fun getUserById(uid : String){
+        viewModelScope.launch {
+
+            getUserByIdUseCase.getUserById(uid).collect{
+
+                when(it){
+
+                    is ResultState.Error -> {
+                        _profileScreenState.value = _profileScreenState.value.copy(
+                            isLoading = false,
+                            errorMessages = it.message
+                        )
+                    }
+                    is ResultState.Loading -> {
+                        _profileScreenState.value = _profileScreenState.value.copy(
+                            isLoading = true
+                        )
+                    }
+                    is ResultState.Success -> {
+                        _profileScreenState.value = _profileScreenState.value.copy(
+                            isLoading = false,
+                            userData = it.data
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    fun getAllSuggestedProducts(){
+        viewModelScope.launch {
+
+            getAllSuggestedProductsUseCase.getAllSuggestedProducts().collect{
+
+                when(it){
+
+                    is ResultState.Error -> {
+                        _getAllSuggestedProductsState.value = _getAllSuggestedProductsState.value.copy(
+                            isLoading = false,
+                            errorMessages = it.message
+                        )
+                    }
+                    is ResultState.Loading -> {
+                        _getAllSuggestedProductsState.value = _getAllSuggestedProductsState.value.copy(
+                            isLoading = true
+                        )
+                    }
+                    is ResultState.Success -> {
+                        _getAllSuggestedProductsState.value = _getAllSuggestedProductsState.value.copy(
+                            isLoading = false,
+                            userData = it.data
+                        )
+                    }
+
+                }
+
+            }
+        }
+
+    }
 
 
 }
