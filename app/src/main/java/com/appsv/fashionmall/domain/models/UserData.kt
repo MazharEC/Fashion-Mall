@@ -4,8 +4,8 @@ import androidx.compose.runtime.mutableStateMapOf
 
 data class UserData(
 
-    val firstname : String = "",
-    val lastname : String = "",
+    val firstName : String = "",
+    val lastName : String = "",
     val email : String = "",
     val password : String = "",
     val phoneNumber : String = "",
@@ -17,8 +17,8 @@ data class UserData(
 
         val map = mutableStateMapOf<String, Any>()
 
-        map["firstname"] = firstname
-        map["lastname"] = lastname
+        map["firstname"] = firstName
+        map["lastname"] = lastName
         map["email"] = email
         map["password"] = password
         map["phoneNumber"] = phoneNumber
