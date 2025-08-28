@@ -1,6 +1,7 @@
 package com.appsv.fashionmall.presentation.screens
 
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -79,15 +80,9 @@ fun CartScreen(
                     }
                 },
                 scrollBehavior = scrollBehavior
-
             )
-
-
-
-
-
-
         },
+
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -127,7 +122,6 @@ fun CartScreen(
                             .padding(horizontal = 16.dp)
                     ) {
 
-
                         Row(
                             modifier = Modifier.padding(vertical = 8.dp)
                         ) {
@@ -159,9 +153,7 @@ fun CartScreen(
                             items(cartData) { item ->
 
                                 CartItemCard(item = item!!)
-
                             }
-
                         }
 
                         HorizontalDivider(modifier = Modifier.padding(top = 16.dp, bottom = 8.dp))
@@ -176,7 +168,7 @@ fun CartScreen(
 //                                fontWeight = FontWeight.Bold
 //                            )
 //                            Text(
-//                                text = "Rs ${cartData.sumOf { it!!.price  }}",
+//                                text = "BDT ${cartData.sumOf { it!!.price  }}",
 //                                style = MaterialTheme.typography.bodyLarge,
 //                                fontWeight = FontWeight.Bold
 //                            )
