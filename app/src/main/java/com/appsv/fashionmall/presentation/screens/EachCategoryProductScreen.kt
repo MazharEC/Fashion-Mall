@@ -113,7 +113,7 @@ fun EachCategoryProductScreen(
                         .padding(innerPadding)
                 ) {
                     OutlinedTextField(
-                        value = "", // You might want to add a state for this
+                        value = "",
                         onValueChange = { /* Implement search functionality */ },
                         modifier = Modifier
                             .fillMaxWidth()
@@ -140,6 +140,4 @@ fun EachCategoryProductScreen(
             }
         }
     }
-
-
 }
