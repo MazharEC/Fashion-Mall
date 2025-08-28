@@ -82,9 +82,9 @@ fun CategoriesScreen(
                 }
             }
 
-            state.value.errorMessages != null -> {
+            state.value.errorMessage != null -> {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text("Error: ${state.value.errorMessages}")
+                    Text("Error: ${state.value.errorMessage}")
                 }
             }
 

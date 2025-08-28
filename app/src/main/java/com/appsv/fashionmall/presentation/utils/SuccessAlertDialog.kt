@@ -39,7 +39,6 @@ fun SuccessAlertDialog(
         onDismissRequest = {},
         modifier = Modifier.background(shape = RoundedCornerShape(16.dp), color = Color.White),
         content = {
-
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -59,7 +58,7 @@ fun SuccessAlertDialog(
                     Icon(
                         imageVector = Icons.Default.Check,
                         contentDescription = null,
-                        tint = Color.Gray,
+                        tint = Color.White,
                         modifier = Modifier.size(32.dp)
                     )
                 }
@@ -76,7 +75,7 @@ fun SuccessAlertDialog(
                 Text(
                     text = "Congratulations, you have \n completed your registration!",
                     fontSize = 16.sp,
-                    color = Color.Gray,
+                    color = Color.White,
                     textAlign = TextAlign.Center
                 )
                 Spacer(modifier = Modifier.height(24.dp))

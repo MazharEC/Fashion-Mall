@@ -81,9 +81,9 @@ fun HomeScreen(
         Box(modifier = Modifier.fillMaxSize()) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         }
-    } else if (homeState.errorMessages != null) {
+    } else if (homeState.errorMessage != null) {
         Box(modifier = Modifier.fillMaxSize()) {
-            Text(text = homeState.errorMessages!!)
+            Text(text = homeState.errorMessage!!)
         }
     } else {
 
@@ -217,12 +217,12 @@ fun HomeScreen(
                                 CircularProgressIndicator()
                             }
                         }
-                        getAllSuggestedProduct.value.errorMessages != null -> {
+                        getAllSuggestedProduct.value.errorMessage != null -> {
                             Box(
                                 modifier = Modifier.fillMaxSize(),
                                 contentAlignment = Alignment.Center
                             ) {
-                                Text(getAllSuggestedProduct.value.errorMessages!!)
+                                Text(getAllSuggestedProduct.value.errorMessage!!)
                             }
                         }
                         getSuggestedProductData.isEmpty() -> {

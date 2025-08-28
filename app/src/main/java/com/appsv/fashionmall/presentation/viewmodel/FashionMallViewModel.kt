@@ -117,7 +117,7 @@ class FashionMallViewModel @Inject constructor(
                     is ResultState.Error -> {
                         _getSpecificCategoryItemsState.value = _getSpecificCategoryItemsState.value.copy(
                             isLoading = false,
-                            errorMessages = it.message
+                            errorMessage = it.message
                         )
                     }
                     is ResultState.Loading -> {
@@ -129,7 +129,7 @@ class FashionMallViewModel @Inject constructor(
                         _getSpecificCategoryItemsState.value = _getSpecificCategoryItemsState.value.copy(
                             isLoading = false,
                             userData = it.data,
-                            errorMessages = null // Clear any previous errors
+                            errorMessage = null // Clear any previous errors
                         )
                     }
                 }
@@ -147,7 +147,7 @@ class FashionMallViewModel @Inject constructor(
                     is ResultState.Error -> {
                         _getCheckoutState.value = _getCheckoutState.value.copy(
                             isLoading = false,
-                            errorMessages = it.message
+                            errorMessage = it.message
                         )
                     }
                     is ResultState.Loading -> {
@@ -177,7 +177,7 @@ class FashionMallViewModel @Inject constructor(
                     is ResultState.Error -> {
                         _getAllCategoriesState.value = _getAllCategoriesState.value.copy(
                             isLoading = false,
-                            errorMessages = it.message
+                            errorMessage = it.message
                         )
                     }
                     is ResultState.Loading -> {
@@ -207,7 +207,7 @@ class FashionMallViewModel @Inject constructor(
                     is ResultState.Error -> {
                         _getCartState.value = _getCartState.value.copy(
                             isLoading = false,
-                            errorMessages = it.message
+                            errorMessage = it.message
                         )
                     }
                     is ResultState.Loading -> {
@@ -236,7 +236,7 @@ class FashionMallViewModel @Inject constructor(
                     is ResultState.Error -> {
                         _getAllProductsState.value = _getAllProductsState.value.copy(
                             isLoading = false,
-                            errorMessages = it.message
+                            errorMessage = it.message
                         )
                     }
                     is ResultState.Loading -> {
@@ -265,7 +265,7 @@ class FashionMallViewModel @Inject constructor(
                     is ResultState.Error -> {
                         _getAllFavState.value = _getAllFavState.value.copy(
                             isLoading = false,
-                            errorMessages = it.message
+                            errorMessage = it.message
                         )
                     }
                     is ResultState.Loading -> {
@@ -295,7 +295,7 @@ class FashionMallViewModel @Inject constructor(
                     is ResultState.Error -> {
                         _addToFavState.value = _addToFavState.value.copy(
                             isLoading = false,
-                            errorMessages = it.message
+                            errorMessage = it.message
                         )
                     }
                     is ResultState.Loading -> {
@@ -325,7 +325,7 @@ class FashionMallViewModel @Inject constructor(
                     is ResultState.Error -> {
                         _getProductByIdState.value = _getProductByIdState.value.copy(
                             isLoading = false,
-                            errorMessages = it.message
+                            errorMessage = it.message
                         )
                     }
                     is ResultState.Loading -> {
@@ -355,7 +355,7 @@ class FashionMallViewModel @Inject constructor(
                     is ResultState.Error -> {
                         _addToCartState.value = _addToCartState.value.copy(
                             isLoading = false,
-                            errorMessages = it.message
+                            errorMessage = it.message
                         )
                     }
                     is ResultState.Loading -> {
@@ -395,15 +395,15 @@ class FashionMallViewModel @Inject constructor(
 
                     categoriesResult is ResultState.Error -> {
 
-                        HomeScreenState(isLoading = false, errorMessages = categoriesResult.message)
+                        HomeScreenState(isLoading = false, errorMessage = categoriesResult.message)
                     }
                     productsResult is ResultState.Error -> {
 
-                        HomeScreenState(isLoading = false, errorMessages = productsResult.message)
+                        HomeScreenState(isLoading = false, errorMessage = productsResult.message)
                     }
                     bannerResult is ResultState.Error -> {
 
-                        HomeScreenState(isLoading = false, errorMessages = bannerResult.message)
+                        HomeScreenState(isLoading = false, errorMessage = bannerResult.message)
                     }
 
                     categoriesResult is ResultState.Success && productsResult is ResultState.Success && bannerResult is ResultState.Success -> {
@@ -437,7 +437,7 @@ class FashionMallViewModel @Inject constructor(
                     is ResultState.Error -> {
                         _userProfileImageState.value = _userProfileImageState.value.copy(
                             isLoading = false,
-                            errorMessages = it.message
+                            errorMessage = it.message
                         )
                     }
                     is ResultState.Loading -> {
@@ -466,7 +466,7 @@ class FashionMallViewModel @Inject constructor(
                     is ResultState.Error -> {
                         _updateScreenState.value = _updateScreenState.value.copy(
                             isLoading = false,
-                            errorMessages = it.message
+                            errorMessage = it.message
                         )
                     }
                     is ResultState.Loading -> {
@@ -495,7 +495,7 @@ class FashionMallViewModel @Inject constructor(
                     is ResultState.Error -> {
                         _signUpScreenState.value = _signUpScreenState.value.copy(
                             isLoading = false,
-                            errorMessages = it.message
+                            errorMessage = it.message
                         )
                     }
                     is ResultState.Loading -> {
@@ -524,7 +524,7 @@ class FashionMallViewModel @Inject constructor(
                     is ResultState.Error -> {
                         _loginScreenState.value = _loginScreenState.value.copy(
                             isLoading = false,
-                            errorMessages = it.message
+                            errorMessage = it.message
                         )
                     }
                     is ResultState.Loading -> {
@@ -553,7 +553,7 @@ class FashionMallViewModel @Inject constructor(
                     is ResultState.Error -> {
                         _profileScreenState.value = _profileScreenState.value.copy(
                             isLoading = false,
-                            errorMessages = it.message
+                            errorMessage = it.message
                         )
                     }
                     is ResultState.Loading -> {
@@ -582,7 +582,7 @@ class FashionMallViewModel @Inject constructor(
                     is ResultState.Error -> {
                         _getAllSuggestedProductsState.value = _getAllSuggestedProductsState.value.copy(
                             isLoading = false,
-                            errorMessages = it.message
+                            errorMessage = it.message
                         )
                     }
                     is ResultState.Loading -> {
@@ -610,93 +610,93 @@ class FashionMallViewModel @Inject constructor(
 
 data class ProfileScreenState(
     val isLoading: Boolean = false,
-    val errorMessages: String? = null,
+    val errorMessage: String? = null,
     val userData: UserDataParent? = null
 
 )
 
 data class SignUpScreenState(
     val isLoading: Boolean = false,
-    val errorMessages: String? = null,
+    val errorMessage: String? = null,
     val userData: String? = null
 
 )
 
 data class LoginScreenState(
     val isLoading: Boolean = false,
-    val errorMessages: String? = null,
+    val errorMessage: String? = null,
     val userData: String? = null
 )
 
 data class UpdateScreenState(
     val isLoading: Boolean = false,
-    val errorMessages: String? = null,
+    val errorMessage: String? = null,
     val userData: String? = null
 )
 
 
 data class UploadUserProfileImageState(
     val isLoading: Boolean = false,
-    val errorMessages: String? = null,
+    val errorMessage: String? = null,
     val userData: String? = null
 )
 
 data class AddToCartState(
     val isLoading: Boolean = false,
-    val errorMessages: String? = null,
+    val errorMessage: String? = null,
     val userData: String? = null
 )
 
 data class GetProductByIdState(
     val isLoading: Boolean = false,
-    val errorMessages: String? = null,
+    val errorMessage: String? = null,
     val userData: ProductDataModels? = null
 )
 
 data class AddToFavState(
     val isLoading: Boolean = false,
-    val errorMessages: String? = null,
+    val errorMessage: String? = null,
     val userData: String? = null
 )
 
 data class GetAllFavState(
     val isLoading: Boolean = false,
-    val errorMessages: String? = null,
+    val errorMessage: String? = null,
     val userData: List<ProductDataModels?> = emptyList()
 )
 
 data class GetAllProductsState(
     val isLoading: Boolean = false,
-    val errorMessages: String? = null,
+    val errorMessage: String? = null,
     val userData: List<ProductDataModels?> = emptyList()
 )
 
 data class GetCartState(
     val isLoading: Boolean = false,
-    val errorMessages: String? = null,
+    val errorMessage: String? = null,
     val userData: List<CartDataModels?> = emptyList()
 )
 
 data class GetAllCategoriesState(
     val isLoading: Boolean = false,
-    val errorMessages: String? = null,
+    val errorMessage: String? = null,
     val userData: List<CategoryDataModels?> = emptyList()
 )
 
 data class GetCheckoutState(
     val isLoading: Boolean = false,
-    val errorMessages: String? = null,
+    val errorMessage: String? = null,
     val userData: ProductDataModels? = null
 )
 
 data class GetSpecificCategoryItemsState(
     val isLoading: Boolean = false,
-    val errorMessages: String? = null,
+    val errorMessage: String? = null,
     val userData: List<ProductDataModels?> = emptyList()
 )
 
 data class GetAllSuggestedProductsState(
     val isLoading: Boolean = false,
-    val errorMessages: String? = null,
+    val errorMessage: String? = null,
     val userData: List<ProductDataModels?> = emptyList()
 )

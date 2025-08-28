@@ -87,7 +87,7 @@ fun GetAllProductScreen(
                         CircularProgressIndicator()
                     }
                 }
-                getAllProductsState.value.errorMessages != null -> {
+                getAllProductsState.value.errorMessage != null -> {
                     Box(
                         modifier = Modifier.fillMaxSize(),
                         contentAlignment = Alignment.Center

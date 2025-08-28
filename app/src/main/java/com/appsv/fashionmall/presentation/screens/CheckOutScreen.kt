@@ -98,7 +98,7 @@ fun CheckoutScreen(
                 }
             }
 
-            state.value.errorMessages!= null -> {
+            state.value.errorMessage!= null -> {
                 Box(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center

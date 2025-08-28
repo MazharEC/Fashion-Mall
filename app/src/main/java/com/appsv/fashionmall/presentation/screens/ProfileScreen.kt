@@ -124,8 +124,8 @@ fun ProfileScreen(
     if (upDateScreenState.value.userData != null) {
         Toast.makeText(context, upDateScreenState.value.userData, Toast.LENGTH_SHORT).show()
     }
-    else if (upDateScreenState.value.errorMessages != null) {
-        Toast.makeText(context, upDateScreenState.value.errorMessages, Toast.LENGTH_SHORT).show()
+    else if (upDateScreenState.value.errorMessage != null) {
+        Toast.makeText(context, upDateScreenState.value.errorMessage, Toast.LENGTH_SHORT).show()
     }
     else if (upDateScreenState.value.isLoading) {
         Box(modifier = Modifier.fillMaxSize()) {
@@ -139,8 +139,8 @@ fun ProfileScreen(
     if (userProfileImageState.value.userData != null) {
         imageUrl.value = userProfileImageState.value.userData.toString()
     }
-    else if (userProfileImageState.value.errorMessages != null) {
-        Toast.makeText(context, userProfileImageState.value.errorMessages, Toast.LENGTH_SHORT).show()
+    else if (userProfileImageState.value.errorMessage != null) {
+        Toast.makeText(context, userProfileImageState.value.errorMessage, Toast.LENGTH_SHORT).show()
     }
     else if (userProfileImageState.value.isLoading) {
         Box(modifier = Modifier.fillMaxSize()) {
@@ -159,8 +159,8 @@ fun ProfileScreen(
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         }
     }
-    else if (profileScreenState.value.errorMessages != null) {
-        Text(text = profileScreenState.value.errorMessages!!)
+    else if (profileScreenState.value.errorMessage != null) {
+        Text(text = profileScreenState.value.errorMessage!!)
 
     }
     else if (profileScreenState.value.userData != null) {

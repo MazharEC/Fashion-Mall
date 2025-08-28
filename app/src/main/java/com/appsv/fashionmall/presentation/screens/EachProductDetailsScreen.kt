@@ -73,8 +73,8 @@ fun EachProductDetailsScreen(
                 }
             }
 
-            getProductById.value.errorMessages != null -> {
-                Text(text = getProductById.value.errorMessages!!)
+            getProductById.value.errorMessage != null -> {
+                Text(text = getProductById.value.errorMessage!!)
             }
 
             getProductById.value.userData != null -> {

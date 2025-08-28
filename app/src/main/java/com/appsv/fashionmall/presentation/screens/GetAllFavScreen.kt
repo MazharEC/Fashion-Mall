@@ -88,12 +88,12 @@ fun GetAllFavScreen(
                         CircularProgressIndicator()
                     }
                 }
-                getAllFav.value.errorMessages != null -> {
+                getAllFav.value.errorMessage != null -> {
                     Box(
                         modifier = Modifier.fillMaxSize(),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text(getAllFav.value.errorMessages!!)
+                        Text(getAllFav.value.errorMessage!!)
                     }
                 }
                 getFavData.isEmpty() -> {

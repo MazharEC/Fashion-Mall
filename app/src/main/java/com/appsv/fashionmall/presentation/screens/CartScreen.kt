@@ -98,7 +98,7 @@ fun CartScreen(
                         CircularProgressIndicator()
                     }
                 }
-                cartState.value.errorMessages != null -> {
+                cartState.value.errorMessage != null -> {
                     Box(
                         modifier = Modifier.fillMaxSize(),
                         contentAlignment = Alignment.Center

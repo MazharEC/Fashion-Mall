@@ -63,10 +63,10 @@ fun LoginScreen(navController: NavHostController, viewModel: FashionMallViewMode
         Box(modifier = Modifier.fillMaxSize()){
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         }
-    }else if(state.value.errorMessages != null){
+    }else if(state.value.errorMessage != null){
 
         Box(modifier = Modifier.fillMaxSize()){
-            Text(text = state.value.errorMessages!!)
+            Text(text = state.value.errorMessage!!)
         }
     }else if(state.value.userData != null){
 

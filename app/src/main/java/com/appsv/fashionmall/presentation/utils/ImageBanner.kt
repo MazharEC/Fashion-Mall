@@ -32,6 +32,65 @@ import com.appsv.fashionmall.domain.models.BannerDataModels
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+
+@Composable
+fun Banner(banners: List<BannerDataModels>) {
+
+    val pagerState = rememberPagerState(pageCount = { banners.size })
+    val scope = rememberCoroutineScope()
+
+    LaunchedEffect(Unit) {
+
+        while (true) {
+            delay(2000)
+            val nextPage = (pagerState.currentPage + 1) % banners.size
+
+            scope.launch {
+                pagerState.animateScrollToPage(nextPage)
+            }
+
+        }
+    }
+
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Box(
+            modifier = Modifier.wrapContentSize()
+        ) {
+            HorizontalPager(
+                state = pagerState,
+                modifier = Modifier.wrapContentSize()
+
+            ) { selectedPage ->
+
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(170.dp)
+                        .padding(top = 8.dp, start = 15.dp, end = 15.dp),
+                    elevation = CardDefaults.cardElevation(8.dp)
+                ) {
+                    AsyncImage(
+                        model = banners[selectedPage].image,
+                        contentDescription = null,
+                        modifier = Modifier.fillMaxWidth(),
+                        contentScale = ContentScale.Crop,
+                        alignment = Alignment.Center
+                    )
+                }
+
+            }
+        }
+        PageIndicator(
+            pageCount = banners.size,
+            selectedPage = pagerState.currentPage,
+            modifier = Modifier
+        )
+    }
+}
+
 @Composable
 fun SelectedDot(modifier: Modifier) {
 
@@ -83,61 +142,3 @@ fun PageIndicator(pageCount: Int, selectedPage: Int, modifier: Modifier) {
     }
 }
 
-
-@Composable
-fun Banner(banners: List<BannerDataModels>) {
-
-    val pagerState = rememberPagerState(pageCount = { banners.size })
-    val scope = rememberCoroutineScope()
-
-    LaunchedEffect(Unit) {
-
-        while (true) {
-            delay(1500)
-            val nextPage = (pagerState.currentPage + 1) % banners.size
-
-            scope.launch {
-                pagerState.animateScrollToPage(nextPage)
-            }
-
-        }
-    }
-
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Box(
-            modifier = Modifier.wrapContentSize()
-        ) {
-            HorizontalPager(
-                state = pagerState,
-                modifier = Modifier.wrapContentSize()
-
-            ) { selectedPage ->
-
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(170.dp)
-                        .padding(top = 8.dp, start = 15.dp, end = 15.dp),
-                    elevation = CardDefaults.cardElevation(8.dp)
-                ) {
-                    AsyncImage(
-                        model = banners[selectedPage].image,
-                        contentDescription = null,
-                        modifier = Modifier.fillMaxWidth(),
-                        contentScale = ContentScale.Crop,
-                        alignment = Alignment.Center
-                    )
-                }
-
-            }
-        }
-        PageIndicator(
-            pageCount = banners.size,
-            selectedPage = pagerState.currentPage,
-            modifier = Modifier
-        )
-    }
-}
