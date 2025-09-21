@@ -5,7 +5,7 @@ plugins {
 
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
-    kotlin("plugin.serialization") version "2.0.0"
+    id("org.jetbrains.kotlin.plugin.serialization")
     alias(libs.plugins.google.gms.google.services)
 }
 
@@ -70,8 +70,8 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     // this is for hilt dependency injection
-    implementation("com.google.dagger:hilt-android:2.50")
-    kapt("com.google.dagger:hilt-android-compiler:2.50")
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
 
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
     kapt("androidx.hilt:hilt-compiler:1.2.0")
