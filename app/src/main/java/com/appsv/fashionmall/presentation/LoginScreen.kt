@@ -43,6 +43,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.appsv.fashionmall.R
 import com.appsv.fashionmall.domain.models.UserData
+import com.appsv.fashionmall.presentation.navigation.Routes
 import com.appsv.fashionmall.presentation.navigation.SubNavigation
 import com.appsv.fashionmall.presentation.utils.CustomTextField
 import com.appsv.fashionmall.presentation.utils.SuccessAlertDialog
@@ -171,7 +172,7 @@ fun LoginScreen(navController: NavHostController, viewModel: FashionMallViewMode
 
                 TextButton(
                     onClick = {
-                        navController.navigate(SubNavigation.LoginSignUpScreen){
+                        navController.navigate(Routes.SignUpScreen){
                             popUpTo(SubNavigation.LoginSignUpScreen){
                                 inclusive = true
                             }

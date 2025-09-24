@@ -28,13 +28,14 @@ import com.appsv.fashionmall.domain.useCase.LoginUserUseCase
 import com.appsv.fashionmall.domain.useCase.RegisterUserUseCase
 import com.appsv.fashionmall.domain.useCase.UpdateUserDataUseCase
 import com.appsv.fashionmall.domain.useCase.UploadUserProfileImageUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
+@HiltViewModel
 class FashionMallViewModel @Inject constructor(
 
     private val registerUserUseCase: RegisterUserUseCase,

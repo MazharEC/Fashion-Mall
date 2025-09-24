@@ -60,7 +60,6 @@ import com.google.firebase.auth.FirebaseAuth
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun App(
-
     firebaseAuth: FirebaseAuth
 ) {
 
@@ -72,38 +71,27 @@ fun App(
 
     val shouldShowBottomBar = remember { mutableStateOf(false) }
 
-    val startScreen = remember(firebaseAuth.currentUser) {
-        if (firebaseAuth.currentUser == null) {
-            SubNavigation.LoginSignUpScreen
-        } else {
-            SubNavigation.MainHomeScreen
-        }
-    }
+    // CHANGED: Always start with LoginSignUpScreen for demo, regardless of auth state
+    val startScreen = SubNavigation.LoginSignUpScreen
 
     LaunchedEffect(currentDestination) {
-
         shouldShowBottomBar.value = when (currentDestination) {
             Routes.LoginScreen::class.qualifiedName,
             Routes.SignUpScreen::class.qualifiedName -> false
-
             else -> true
         }
     }
 
     val bottomNavItem = listOf(
-
         BottomNavItem("Home", Icons.Default.Home, Icons.Outlined.Home),
         BottomNavItem("FavList", Icons.Default.Favorite, Icons.Outlined.Favorite),
         BottomNavItem("Cart", Icons.Default.ShoppingCart, Icons.Outlined.ShoppingCart),
         BottomNavItem("Profile", Icons.Default.Person, Icons.Outlined.Person)
-
     )
-
 
     Scaffold(
         bottomBar = {
             if (shouldShowBottomBar.value) {
-
                 Surface(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -120,9 +108,7 @@ fun App(
                         indicatorDirection = IndicatorDirection.BOTTOM,
                         indicatorStyle = IndicatorStyle.FILLED
                     ) {
-
                         bottomNavItem.forEachIndexed { index, navigationItem ->
-
                             BottomBarItem(
                                 modifier = Modifier.align(alignment = Alignment.Top),
                                 selected = selectedItem == index,
@@ -160,21 +146,17 @@ fun App(
                                             launchSingleTop = true
                                             restoreState = true
                                         }
-
                                     }
-
                                 },
                                 imageVector = navigationItem.icon,
                                 label = navigationItem.name,
                                 containerColor = Color.Transparent
                             )
                         }
-
                     }
                 }
             }
         }
-
     ) { innerPadding ->
 
         Box(
@@ -193,7 +175,6 @@ fun App(
                     composable<Routes.SignUpScreen> {
                         SignUpScreen(navController = navController)
                     }
-
                 }
 
                 navigation<SubNavigation.MainHomeScreen>(startDestination = Routes.HomeScreen) {
@@ -242,13 +223,10 @@ fun App(
                         val product: Routes.CheckoutScreen = it.toRoute()
                         CheckoutScreen(navController = navController, productId = product.productId)
                     }
-
                 }
             }
         }
-
     }
-
 }
 
 data class BottomNavItem(val name: String, val icon: ImageVector, val unselectedIcon: ImageVector)
