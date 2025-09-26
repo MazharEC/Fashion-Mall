@@ -128,7 +128,7 @@ class RepoImpl @Inject constructor(
         trySend(ResultState.Loading)
 
         FirebaseStorage.getInstance().reference.child("userProfileImage/${System.currentTimeMillis()}+ ${firebaseAuth.currentUser?.uid}")
-            .putFile(uri ?: Uri.EMPTY).addOnCompleteListener {
+            .putFile(uri).addOnCompleteListener {
 
                 it.result.storage.downloadUrl.addOnCompleteListener { imageUri ->
                     trySend(ResultState.Success(imageUri.toString()))
